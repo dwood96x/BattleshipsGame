@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
     void Start ()
     {
         GetResolution = Screen.currentResolution;
-        mBoard.CreateBoardOne(mBoard.GetHeightMod(GetResolution));       
-        mBoard.CreateBoardTwo(mBoard.GetHeightMod(GetResolution));
+        //mBoard.CreateBoardOne(mBoard.GetHeightMod(GetResolution));       
+        //mBoard.CreateBoardTwo(mBoard.GetHeightMod(GetResolution));
+        mBoard.CreateBoardOneNormal();
+        mBoard.CreateBoardTwoNormal();
 	}
 }
