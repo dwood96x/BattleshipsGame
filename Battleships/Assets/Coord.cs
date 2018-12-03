@@ -13,6 +13,8 @@ public class Coord : MonoBehaviour
     public GameBoard mBoard = null;
     [HideInInspector]
     public RectTransform mRectTransform = null;
+    [HideInInspector]
+    public Ship mCurrentShip = null;
 
     public void Setup(Vector2Int newBoardPos, GameBoard newBoard)
     {
