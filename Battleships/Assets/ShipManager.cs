@@ -31,7 +31,7 @@ public class ShipManager : MonoBehaviour
         mPlayerOneShips = CreateShips(Color.white, new Color32(80, 124, 159, 255), board);
 
         //Place ships
-        PlaceShips(1, 0, mPlayerOneShips, board);
+        PlaceShips(mPlayerOneShips, board);
 
     }
     private List<Ship> CreateShips(Color color, Color32 spriteColor, GameBoard board)
@@ -64,9 +64,9 @@ public class ShipManager : MonoBehaviour
 
     private void PlaceShips(List<Ship> ships, GameBoard board)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 6; i++)
         {
-            ships[i].Place(board.mAllCoords[i])
+            ships[i].Place(board.mPOneCoords[i,i+1]);
         }
     }
 }

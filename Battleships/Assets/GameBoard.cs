@@ -63,7 +63,7 @@ public class GameBoard : MonoBehaviour
 
                 // Position
                 RectTransform rectTransform = newCoord.GetComponent<RectTransform>();
-                rectTransform.anchoredPosition = new Vector2((x * 50) + 25, (y * 50) + 25);
+                rectTransform.anchoredPosition = new Vector2((x * 50) + 50, (y * 50) + 50);
 
                 // Setup
                 mPOneCoords[x, y] = newCoord.GetComponent<Coord>();
@@ -82,7 +82,7 @@ public class GameBoard : MonoBehaviour
 
                 // Position
                 RectTransform rectTransform = newCoord.GetComponent<RectTransform>();
-                rectTransform.anchoredPosition = new Vector2((x * 50) + 25, (y * 50) + 550);
+                rectTransform.anchoredPosition = new Vector2((x * 50) + 50, (y * 50) + 575);
 
                 // Setup
                 mPTwoCoords[x, y] = newCoord.GetComponent<Coord>();
