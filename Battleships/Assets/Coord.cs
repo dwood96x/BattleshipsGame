@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Coord : MonoBehaviour
+public class Coord : EventTrigger
 {
     public Image mOutlineImage;
 
@@ -15,7 +16,6 @@ public class Coord : MonoBehaviour
     public RectTransform mRectTransform = null;
     [HideInInspector]
     public Ship mCurrentShip = null;
-    public Color Color = Color.blue;
 
     public void Setup(Vector2Int newBoardPos, GameBoard newBoard)
     {
@@ -28,7 +28,7 @@ public class Coord : MonoBehaviour
     {
         if (mCurrentShip != null)
         {
-            //mCurrentShip.Hit();
+            mCurrentShip.Hit();
         }
         else
         {
@@ -38,5 +38,15 @@ public class Coord : MonoBehaviour
     public void Miss()
     {
         Image.defaultGraphicMaterial.color = Color.cyan;
+    }
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        base.OnPointerClick(eventData);
+
+        if (mCurrentShip.mPlayer.PlayerNum != 1 && mCurrentShip != null)
+        {
+            if(mCurrentShip.mPlayer.MyTurn == )
+            mCurrentShip.Hit();
+        }
     }
 }

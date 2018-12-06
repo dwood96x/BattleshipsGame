@@ -9,8 +9,11 @@ public class Ship : EventTrigger
     [HideInInspector]
     public Color mColor = Color.clear;
 
+    public Player mPlayer = null;
+
     protected Coord mOriginalCoord = null;
     protected Coord mCurrentCoord = null;
+    protected Coord mNextCoord = null;
 
     protected RectTransform mRectTransform = null;
     protected ShipManager mShipManager;
@@ -49,8 +52,6 @@ public class Ship : EventTrigger
         {
             for (int y = 0; y < 10; y++)
             {
-                //TODO Check if coord has ship
-
                 //Add possible locations to list
                 if(mCurrentCoord.mBoard.mPOneCoords[i,y].mCurrentShip == null)
                 {
@@ -74,7 +75,33 @@ public class Ship : EventTrigger
         }
         mHighlightedCoords.Clear();
     }
+    protected void Move()
+    {
+        mCurrentCoord.mCurrentShip = null;
 
+        mCurrentCoord = mNextCoord;
+        mCurrentCoord.mCurrentShip = this;
+
+        transform.position = mCurrentCoord.transform.position;
+        mNextCoord = null;
+    }
+    public void Hit()
+    {
+        mColor = Color.red;
+    }
+    public void Remove()
+    {
+        // Removes the ship from the coord
+        mCurrentCoord.mCurrentShip = null;
+        //Removes the ship from the game
+        gameObject.SetActive(false);
+    }
+    public void Reset()
+    {
+        Remove();
+
+        Place(mOriginalCoord);
+    }
     public override void OnBeginDrag(PointerEventData eventData)
     {
         base.OnBeginDrag(eventData);
@@ -87,12 +114,30 @@ public class Ship : EventTrigger
         base.OnDrag(eventData);
         //Makes the ship move with the cursor
         transform.position += (Vector3)eventData.delta;
+
+        foreach (Coord coord in mHighlightedCoords)
+        {
+            if (RectTransformUtility.RectangleContainsScreenPoint(coord.mRectTransform, Input.mousePosition))
+            {
+                mNextCoord = coord;
+                break;
+            }
+
+            mNextCoord = null;
+        }
     }
     public override void OnEndDrag(PointerEventData eventData)
     {
         base.OnEndDrag(eventData);
 
         ClearCoords();
-    }
 
+        if (!mNextCoord)
+        {
+            transform.position = mCurrentCoord.gameObject.transform.position;
+            return;
+        }
+
+        Move();
+    }
 }
