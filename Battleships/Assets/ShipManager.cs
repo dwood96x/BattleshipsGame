@@ -12,11 +12,13 @@ public class ShipManager : MonoBehaviour
     private List<Ship> mPlayerOneShips = null;
     private List<Ship> mPlayerTwoShips = null;
 
+    // TODO: See if removing the dictionary and making ship order simply types of ships is better/superior
+    // Creates the order the ships will be created in
     private string[] mShipOrder = new string[6]
     {
-        "P", "P", "D", "D", "C", "B"
+        "P","P", "D", "D", "C", "B"
     };
-
+    // Dictionary of what each
     private Dictionary<string, Type> mShipLibrary = new Dictionary<string, Type>
     {
         {"P", typeof(Patrol_Boat) },
@@ -28,7 +30,7 @@ public class ShipManager : MonoBehaviour
     public void Setup(GameBoard board)
     {
         //Create the player ones pieces
-        mPlayerOneShips = CreateShips(Color.white, new Color32(80, 124, 159, 255), board);
+        mPlayerOneShips = CreateShips(Color.white, new Color32(0, 0, 0, 255), board);
 
         //Place ships
         PlaceShips(mPlayerOneShips, board);

@@ -15,6 +15,7 @@ public class Coord : MonoBehaviour
     public RectTransform mRectTransform = null;
     [HideInInspector]
     public Ship mCurrentShip = null;
+    public Color Color = Color.blue;
 
     public void Setup(Vector2Int newBoardPos, GameBoard newBoard)
     {
@@ -22,5 +23,20 @@ public class Coord : MonoBehaviour
         mBoard = newBoard;
 
         mRectTransform = GetComponent<RectTransform>();
+    }
+    public void Fire()
+    {
+        if (mCurrentShip != null)
+        {
+            //mCurrentShip.Hit();
+        }
+        else
+        {
+            Miss();
+        }
+    }
+    public void Miss()
+    {
+        Image.defaultGraphicMaterial.color = Color.cyan;
     }
 }

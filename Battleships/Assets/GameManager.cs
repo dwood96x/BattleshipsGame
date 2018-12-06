@@ -7,14 +7,14 @@ public class GameManager : MonoBehaviour
     public ShipManager mShipManager;
     private Resolution GetResolution;
 
-    // Use this for initialization
     void Start ()
     {
-        GetResolution = Screen.currentResolution;
+        // The following commented out methods were for when my game didn't properly resize for different sceen sizes, will delete when I know I dont need it
+        //GetResolution = Screen.currentResolution;
         //mBoard.CreateBoardOne(mBoard.GetHeightMod(GetResolution));       
         //mBoard.CreateBoardTwo(mBoard.GetHeightMod(GetResolution));
-        mBoard.CreateBoardOneNormal();
-        mBoard.CreateBoardTwoNormal();
+        mBoard.CreateBoardOne();
+        mBoard.CreateBoardTwo();
         mShipManager.Setup(mBoard);
 	}
 }

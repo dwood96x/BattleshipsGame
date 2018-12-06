@@ -12,6 +12,9 @@ public class GameBoard : MonoBehaviour
     public Coord[,] mPOneCoords = new Coord[10, 10];
     public Coord[,] mPTwoCoords = new Coord[10, 10];
 
+    //I created two variations of creating the board, reason being is I had issues with making the game compatible with all screen sizes
+    // I was able to fix the problem by changing values within unity itself, will leave these methods until I know I no longer need them
+
     // Creates bottom board
     public void CreateBoardOne(int Heightmod)
     {
@@ -52,7 +55,7 @@ public class GameBoard : MonoBehaviour
             }
         }
     }
-    public void CreateBoardOneNormal()
+    public void CreateBoardOne()
     {
         for (int x = 0; x < 10; x++)
         {
@@ -71,7 +74,7 @@ public class GameBoard : MonoBehaviour
             }
         }
     }
-    public void CreateBoardTwoNormal()
+    public void CreateBoardTwo()
     {
         for (int x = 0; x < 10; x++)
         {
