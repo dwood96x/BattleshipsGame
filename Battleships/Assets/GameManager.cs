@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public GameBoard mBoard;
     public ShipManager mShipManager;
     private Resolution GetResolution;
+    public TurnManager mTurnManager;
 
     void Start ()
     {

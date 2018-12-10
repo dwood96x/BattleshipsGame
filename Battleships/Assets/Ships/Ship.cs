@@ -21,7 +21,7 @@ public class Ship : EventTrigger
     protected Vector3Int mMovement = Vector3Int.one;
     protected List<Coord> mHighlightedCoords = new List<Coord>();
 
-    public virtual void Setup(Color color, Color32 newSpriteColor, ShipManager newShipManager)
+    public virtual void Setup(Color color, Color32 newSpriteColor, ShipManager newShipManager )
     {
         mShipManager = newShipManager;
 

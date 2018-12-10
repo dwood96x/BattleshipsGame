@@ -45,7 +45,7 @@ public class Coord : EventTrigger
 
         if (mCurrentShip.mPlayer.PlayerNum != 1 && mCurrentShip != null)
         {
-            if(mCurrentShip.mPlayer.MyTurn == )
+            if(mCurrentShip.mPlayer.MyTurn == false)
             mCurrentShip.Hit();
         }
     }
