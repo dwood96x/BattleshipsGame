@@ -6,14 +6,20 @@ public class Player : MonoBehaviour
 {
     private string Username;
     private int PlayerID;
-    [HideInInspector]
     public int PlayerNum;
-    //Player num might be unessissary as both players will be instantiated as objects
+    [HideInInspector]
     private bool HasShips;
     [HideInInspector]
     public bool MyTurn;
     [HideInInspector]
     public bool Setup = true;
+
+    public Player(string newUsername, int newPlayerID, int newPlayerNum)
+    {
+        Username = newUsername;
+        PlayerID = newPlayerID;
+        PlayerNum = newPlayerNum;
+    }
     // TODO : Create a way to insantiate the players
     // TODO : Make the game get information from the website on user details
     public void CreatePlayer()
@@ -27,7 +33,7 @@ public class Player : MonoBehaviour
     }
     public void StartTurn()
     {
-        throw new System.NotImplementedException();
+        MyTurn = true;
     }
     public void EndTurn()
     {

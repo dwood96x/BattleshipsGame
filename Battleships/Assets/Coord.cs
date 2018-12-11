@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Coord : EventTrigger
+public class Coord : EventTrigger, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     public Image mOutlineImage;
 
@@ -16,6 +16,9 @@ public class Coord : EventTrigger
     public RectTransform mRectTransform = null;
     [HideInInspector]
     public Ship mCurrentShip = null;
+    [HideInInspector]
+    public delegate void Missed();
+    public static event Missed MissedEvent;
 
     public void Setup(Vector2Int newBoardPos, GameBoard newBoard)
     {
@@ -26,27 +29,27 @@ public class Coord : EventTrigger
     }
     public void Fire()
     {
-        if (mCurrentShip != null)
+        if (mCurrentShip == null)
         {
-            mCurrentShip.Hit();
+            Miss();
         }
         else
         {
-            Miss();
+            if (mCurrentShip.mPlayer.PlayerNum != 1 && mCurrentShip.mPlayer.MyTurn == true)
+            {
+                mCurrentShip.Hit();
+            }
         }
     }
     public void Miss()
     {
-        Image.defaultGraphicMaterial.color = Color.cyan;
+        GetComponent<Image>().color = Color.cyan;
+        //MissedEvent();
     }
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
 
-        if (mCurrentShip.mPlayer.PlayerNum != 1 && mCurrentShip != null)
-        {
-            if(mCurrentShip.mPlayer.MyTurn == false)
-            mCurrentShip.Hit();
-        }
+        Fire();
     }
 }

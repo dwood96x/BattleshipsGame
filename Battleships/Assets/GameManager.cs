@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public ShipManager mShipManager;
     private Resolution GetResolution;
     public TurnManager mTurnManager;
+    public Player PlayerOne;
+    public Player PlayerTwo;
 
     void Start ()
     {
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
         //mBoard.CreateBoardTwo(mBoard.GetHeightMod(GetResolution));
         mBoard.CreateBoardOne();
         mBoard.CreateBoardTwo();
-        mShipManager.Setup(mBoard);
-	}
+        PlayerOne = new Player("dwood",1,1);
+        mShipManager.InitialSetup(mBoard,PlayerOne);
+    }
 }

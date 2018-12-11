@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    [HideInInspector]
-    public bool mPTurn = false;
-    [HideInInspector]
-    public bool Setup = true;
-
-    public void StartGame()
+    public void StartGame(GameManager manager)
     {
-        Setup = false;
-        mPTurn = true;
+        manager.PlayerOne.Setup = false;
+        manager.PlayerOne.MyTurn = true;
     }
-    public void EndGame()
+    public void EndGame(GameManager manager)
     {
-        mPTurn = false;
-        Setup = true;
+        manager.PlayerOne.MyTurn = false;
+        manager.PlayerOne.Setup = true;
     }
-	// Update is called once per frame
-	void Update ()
+    public void POneTurnStart(GameManager manager)
     {
-		
-	}
+        manager.PlayerOne.MyTurn = true;
+        manager.PlayerTwo.MyTurn = false;
+    }
+    public void PTwoTurnStart(GameManager manager)
+    {
+        manager.PlayerTwo.MyTurn = true;
+        manager.PlayerOne.MyTurn = false;
+    }
 }

@@ -9,7 +9,7 @@ public class Ship : EventTrigger
     [HideInInspector]
     public Color mColor = Color.clear;
 
-    public Player mPlayer = null;
+    public Player mPlayer;
 
     protected Coord mOriginalCoord = null;
     protected Coord mCurrentCoord = null;
@@ -21,10 +21,10 @@ public class Ship : EventTrigger
     protected Vector3Int mMovement = Vector3Int.one;
     protected List<Coord> mHighlightedCoords = new List<Coord>();
 
-    public virtual void Setup(Color color, Color32 newSpriteColor, ShipManager newShipManager )
+    public virtual void Setup(Color color, Color32 newSpriteColor, ShipManager newShipManager, Player newPlayer)
     {
         mShipManager = newShipManager;
-
+        mPlayer = newPlayer;
         mColor = color;
         GetComponent<Image>().color = newSpriteColor;
         mRectTransform = GetComponent<RectTransform>();
@@ -106,24 +106,30 @@ public class Ship : EventTrigger
     {
         base.OnBeginDrag(eventData);
 
-        ShowPossMoves();
-        ShowCoords();
+        if (this.mPlayer.Setup == true)
+        {
+            ShowPossMoves();
+            ShowCoords();
+        }
     }
     public override void OnDrag(PointerEventData eventData)
     {
         base.OnDrag(eventData);
         //Makes the ship move with the cursor
-        transform.position += (Vector3)eventData.delta;
-
-        foreach (Coord coord in mHighlightedCoords)
+        if (this.mPlayer.Setup == true)
         {
-            if (RectTransformUtility.RectangleContainsScreenPoint(coord.mRectTransform, Input.mousePosition))
-            {
-                mNextCoord = coord;
-                break;
-            }
+            transform.position += (Vector3)eventData.delta;
 
-            mNextCoord = null;
+            foreach (Coord coord in mHighlightedCoords)
+            {
+                if (RectTransformUtility.RectangleContainsScreenPoint(coord.mRectTransform, Input.mousePosition))
+                {
+                    mNextCoord = coord;
+                    break;
+                }
+
+                mNextCoord = null;
+            }
         }
     }
     public override void OnEndDrag(PointerEventData eventData)

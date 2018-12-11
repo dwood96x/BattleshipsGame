@@ -27,16 +27,26 @@ public class ShipManager : MonoBehaviour
         {"B", typeof(Battleship) }
     };
 
-    public void Setup(GameBoard board)
+    // The initial setup the game does. Doesn't create the other players ships until the a game begins
+    public void InitialSetup(GameBoard board, Player player)
     {
         //Create the player ones pieces
-        mPlayerOneShips = CreateShips(Color.white, new Color32(0, 0, 0, 255), board);
+        mPlayerOneShips = CreateShips(Color.white, new Color32(0, 0, 0, 255), board, player);
 
         //Place ships
         PlaceShips(mPlayerOneShips, board);
 
     }
-    private List<Ship> CreateShips(Color color, Color32 spriteColor, GameBoard board)
+    public void SetupEnemy(GameBoard board, Player player)
+    {
+        //TODO : Randomsize the enemy ships locations
+        //Create the player twos pieces
+        mPlayerOneShips = CreateShips(Color.blue, new Color32(0, 0, 0, 255), board, player);
+
+        //Place ships
+        PlaceShips(mPlayerTwoShips, board);
+    }
+    private List<Ship> CreateShips(Color color, Color32 spriteColor, GameBoard board, Player player)
     {
         List<Ship> newShips = new List<Ship>();
 
@@ -59,7 +69,7 @@ public class ShipManager : MonoBehaviour
             newShips.Add(newShip);
 
             //Setup piece
-            newShip.Setup(color, spriteColor, this);
+            newShip.Setup(color, spriteColor, this, player);
         }
         return newShips;
     }
