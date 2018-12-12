@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
-    private Coord[,] EnemyCoords;
+    private Coord[,] AITargetCoords;
     public void Searching()
     {
 
@@ -16,6 +16,10 @@ public class AI : MonoBehaviour
     public void Random()
     {
 
+    }
+    public void SetAITargetCoords(Coord[,] coords)
+    {
+        AITargetCoords = coords;
     }
 
 }

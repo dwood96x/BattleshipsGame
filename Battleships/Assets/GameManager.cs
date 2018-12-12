@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public TurnManager mTurnManager;
     public Player PlayerOne;
     public Player PlayerTwo;
+    public AI AILogic;
 
     void Start ()
     {
@@ -21,5 +22,6 @@ public class GameManager : MonoBehaviour
         PlayerOne = new Player("dwood", 1, 1);
         PlayerTwo = new Player("AI", 9000, 2);
         mShipManager.InitialSetup(mBoard,PlayerOne);
+        AILogic.SetAITargetCoords(mBoard.mPOneCoords);
     }
 }

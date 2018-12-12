@@ -6,12 +6,12 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     public GameManager gamemanager;
-    public static int PlayersTurn = 1;
+    public static int PlayersTurn;
 
     public void StartGame(GameManager manager)
     {
         manager.PlayerOne.Setup = false;
-        manager.PlayerOne.MyTurn = true;
+        PlayersTurn = 1;
     }
     public void EndGame(GameManager manager)
     {

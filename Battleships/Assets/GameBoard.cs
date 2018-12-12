@@ -79,7 +79,7 @@ public class GameBoard : MonoBehaviour
         {
             item.PlayerNumBoard = 1;
             item.MissedEvent += turnManager.OnMissed;
-        }
+        }       
     }
     public void CreateBoardTwo(TurnManager turnManager)
     {
