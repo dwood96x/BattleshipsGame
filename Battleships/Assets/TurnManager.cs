@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
+    public GameManager gamemanager;
+    public static int PlayersTurn = 1;
+
     public void StartGame(GameManager manager)
     {
         manager.PlayerOne.Setup = false;
@@ -16,12 +20,22 @@ public class TurnManager : MonoBehaviour
     }
     public void POneTurnStart(GameManager manager)
     {
-        manager.PlayerOne.MyTurn = true;
-        manager.PlayerTwo.MyTurn = false;
+        PlayersTurn = 1;
     }
     public void PTwoTurnStart(GameManager manager)
     {
-        manager.PlayerTwo.MyTurn = true;
-        manager.PlayerOne.MyTurn = false;
+        PlayersTurn = 2;
     }
+    public void OnMissed(object source, EventArgs e)
+    {
+        if(PlayersTurn != 1)
+        {
+            POneTurnStart(gamemanager);
+        }
+        else
+        {
+            PTwoTurnStart(gamemanager);
+        }
+    }
+
 }

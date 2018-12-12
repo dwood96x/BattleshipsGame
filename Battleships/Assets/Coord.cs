@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class Coord : EventTrigger, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -17,8 +18,13 @@ public class Coord : EventTrigger, IPointerClickHandler, IPointerDownHandler, IP
     [HideInInspector]
     public Ship mCurrentShip = null;
     [HideInInspector]
-    public delegate void Missed();
-    public static event Missed MissedEvent;
+    public int PlayerNumBoard;
+
+    // Created a delegate and event that will raise when a shot is missed. Purpose is to signal when to switch turns and keep the 
+    // game more decoupled
+    [HideInInspector]
+    public delegate void MissHandler(object source, EventArgs args);
+    public event MissHandler MissedEvent;
 
     public void Setup(Vector2Int newBoardPos, GameBoard newBoard)
     {
@@ -29,22 +35,34 @@ public class Coord : EventTrigger, IPointerClickHandler, IPointerDownHandler, IP
     }
     public void Fire()
     {
-        if (mCurrentShip == null)
+        //Checks if the enemy board is fired on by checking position
+        if (PlayerNumBoard == 2 && TurnManager.PlayersTurn == 1)
         {
-            Miss();
-        }
-        else
-        {
-            if (mCurrentShip.mPlayer.PlayerNum != 1 && mCurrentShip.mPlayer.MyTurn == true)
+            if (mCurrentShip == null)
             {
-                mCurrentShip.Hit();
+                Miss();
+            }
+            else
+            {
+                if (mCurrentShip.mPlayer.PlayerNum != 1 && mCurrentShip.mPlayer.MyTurn == true)
+                {
+                    mCurrentShip.Hit();
+                }
             }
         }
     }
     public void Miss()
     {
         GetComponent<Image>().color = Color.cyan;
-        //MissedEvent();
+
+        OnMissed();
+    }
+    protected virtual void OnMissed()
+    {
+        if (MissedEvent != null)
+        {
+            MissedEvent(this, EventArgs.Empty);
+        }
     }
     public override void OnPointerClick(PointerEventData eventData)
     {

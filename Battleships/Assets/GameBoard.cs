@@ -55,7 +55,7 @@ public class GameBoard : MonoBehaviour
             }
         }
     }
-    public void CreateBoardOne()
+    public void CreateBoardOne(TurnManager turnManager)
     {
         for (int x = 0; x < 10; x++)
         {
@@ -71,10 +71,17 @@ public class GameBoard : MonoBehaviour
                 // Setup
                 mPOneCoords[x, y] = newCoord.GetComponent<Coord>();
                 mPOneCoords[x, y].Setup(new Vector2Int(x, y), this);
+
             }
         }
+        //Subscribe coord to events and set who owns the coord
+        foreach (Coord item in mPOneCoords)
+        {
+            item.PlayerNumBoard = 1;
+            item.MissedEvent += turnManager.OnMissed;
+        }
     }
-    public void CreateBoardTwo()
+    public void CreateBoardTwo(TurnManager turnManager)
     {
         for (int x = 0; x < 10; x++)
         {
@@ -91,6 +98,12 @@ public class GameBoard : MonoBehaviour
                 mPTwoCoords[x, y] = newCoord.GetComponent<Coord>();
                 mPTwoCoords[x, y].Setup(new Vector2Int(x, y), this);
             }
+        }
+        //Subscribe coord to events
+        foreach (Coord item in mPTwoCoords)
+        {
+            item.PlayerNumBoard = 2;
+            item.MissedEvent += turnManager.OnMissed;
         }
     }
     // Checks the height modifier for scaling board purposes.Assumes height of 1080 in canvas scaler in other mode. Assumes target height is 460 for webgl.

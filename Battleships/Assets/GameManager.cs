@@ -16,9 +16,10 @@ public class GameManager : MonoBehaviour
         //GetResolution = Screen.currentResolution;
         //mBoard.CreateBoardOne(mBoard.GetHeightMod(GetResolution));       
         //mBoard.CreateBoardTwo(mBoard.GetHeightMod(GetResolution));
-        mBoard.CreateBoardOne();
-        mBoard.CreateBoardTwo();
-        PlayerOne = new Player("dwood",1,1);
+        mBoard.CreateBoardOne(mTurnManager);
+        mBoard.CreateBoardTwo(mTurnManager);
+        PlayerOne = new Player("dwood", 1, 1);
+        PlayerTwo = new Player("AI", 9000, 2);
         mShipManager.InitialSetup(mBoard,PlayerOne);
     }
 }
