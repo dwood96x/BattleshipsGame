@@ -559,6 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamemanager: {fileID: 0}
+  WinnerText: {fileID: 0}
 --- !u!114 &523059822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,7 +1098,7 @@ GameObject:
   - component: {fileID: 1758509567}
   - component: {fileID: 1758509566}
   m_Layer: 0
-  m_Name: Username
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1118,8 +1119,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 125, y: -40}
-  m_SizeDelta: {x: 398, y: 25.2}
+  m_AnchoredPosition: {x: 0.035209, y: -0.025021}
+  m_SizeDelta: {x: 645.7, y: 104.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1758509566
 MonoBehaviour:
@@ -1142,18 +1143,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 52
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
-    m_Alignment: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 52
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Test output box
+  m_Text: 
 --- !u!222 &1758509567
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1205,6 +1206,11 @@ Prefab:
       propertyPath: gamemanager
       value: 
       objectReference: {fileID: 935207269}
+    - target: {fileID: 114915016703851396, guid: aa5059506b9c4b54d9704d38d54f2373,
+        type: 2}
+      propertyPath: WinnerText
+      value: 
+      objectReference: {fileID: 1758509566}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa5059506b9c4b54d9704d38d54f2373, type: 2}
   m_IsPrefabAsset: 0

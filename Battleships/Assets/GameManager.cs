@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         mBoard.CreateBoardTwo(mTurnManager);
         PlayerOne = new Player("dwood", 1, 1);
         PlayerTwo = new Player("AI", 9000, 2);
-        mShipManager.InitialSetup(mBoard,PlayerOne);
+        mShipManager.InitialSetup(mBoard,PlayerOne, mTurnManager);
         AILogic.SetAITargetCoords(mBoard.mPOneCoords);
     }
     //Had to create this method here due to limitations of unity unable to have a function that takes two parameters (which the method does)
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         if (PlayerOne.Setup == true)
         {
-            mShipManager.SetupEnemy(mBoard, PlayerTwo);
+            mShipManager.SetupEnemy(mBoard, PlayerTwo, mTurnManager);
         }
     }
 }

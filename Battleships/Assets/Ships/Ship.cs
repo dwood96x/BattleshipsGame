@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class Ship : EventTrigger
 {
@@ -20,6 +21,10 @@ public class Ship : EventTrigger
 
     protected Vector3Int mMovement = Vector3Int.one;
     protected List<Coord> mHighlightedCoords = new List<Coord>();
+
+    [HideInInspector]
+    public delegate void HitHandler(object source, EventArgs args);
+    public event HitHandler HitEvent;
 
     public virtual void Setup(Color color, Color32 newSpriteColor, ShipManager newShipManager, Player newPlayer)
     {
@@ -87,7 +92,11 @@ public class Ship : EventTrigger
     }
     public void Hit()
     {
-        GetComponent<Image>().color = Color.red;
+        if (GetComponent<Image>().color != Color.red)
+        {
+            GetComponent<Image>().color = Color.red;
+            OnHit();
+        }
     }
     public void Remove()
     {
@@ -101,6 +110,13 @@ public class Ship : EventTrigger
         Remove();
 
         Place(mOriginalCoord);
+    }
+    protected virtual void OnHit()
+    {
+        if (HitEvent != null)
+        {
+            HitEvent(this, EventArgs.Empty);
+        }
     }
     public override void OnBeginDrag(PointerEventData eventData)
     {
@@ -151,6 +167,7 @@ public class Ship : EventTrigger
         base.OnPointerClick(eventData);
         if (this.mPlayer.PlayerNum == 2)
         {
+            TurnManager.PlayerTwoShipsDestroyed++;
             Hit();
         }
     }

@@ -28,22 +28,31 @@ public class ShipManager : MonoBehaviour
     };
 
     // The initial setup the game does. Doesn't create the other players ships until the a game begins
-    public void InitialSetup(GameBoard board, Player player)
+    public void InitialSetup(GameBoard board, Player player, TurnManager turnManager)
     {
         //Create the player ones pieces
         mPlayerOneShips = CreateShips(Color.white, new Color32(0, 0, 0, 255), board, player);
 
         //Place ships
         PlaceShips(mPlayerOneShips, board);
+
+        foreach (Ship item in mPlayerOneShips)
+        {
+            item.HitEvent += turnManager.OnHit;
+        }
     }
-    public void SetupEnemy(GameBoard board, Player player)
+    public void SetupEnemy(GameBoard board, Player player, TurnManager turnManager)
     {
-        //TODO : Randomsize the enemy ships locations
         //Create the player twos pieces
         mPlayerTwoShips = CreateShips(Color.blue, new Color32(0, 0, 0, 0), board, player);
 
         //Place ships
         PlaceShipsRandom(mPlayerTwoShips, board);
+
+        foreach (Ship item in mPlayerTwoShips)
+        {
+            item.HitEvent += turnManager.OnHit;
+        }
     }
     private List<Ship> CreateShips(Color color, Color32 spriteColor, GameBoard board, Player player)
     {

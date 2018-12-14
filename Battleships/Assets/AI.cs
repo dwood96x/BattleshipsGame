@@ -18,8 +18,8 @@ public class AI : MonoBehaviour
         do
         {
             System.Random rand = new System.Random();
-            int xtarget = rand.Next(0, 9);
-            int ytarget = rand.Next(0, 9);
+            int xtarget = rand.Next(0, 10);
+            int ytarget = rand.Next(0, 10);
             AITargetCoords[xtarget, ytarget].AIFire();
         } while (TurnManager.PlayersTurn == 2);
     }

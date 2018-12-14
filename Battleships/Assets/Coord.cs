@@ -66,7 +66,11 @@ public class Coord : EventTrigger, IPointerClickHandler, IPointerDownHandler, IP
         }
         else
         {
-            mCurrentShip.Hit();
+            if (GetComponent<Image>().color != Color.red)
+            {
+                TurnManager.PlayerOneShipsDestroyed++;
+                mCurrentShip.Hit();
+            }
         }
     }
     public void Miss()
