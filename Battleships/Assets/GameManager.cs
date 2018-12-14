@@ -24,4 +24,12 @@ public class GameManager : MonoBehaviour
         mShipManager.InitialSetup(mBoard,PlayerOne);
         AILogic.SetAITargetCoords(mBoard.mPOneCoords);
     }
+    //Had to create this method here due to limitations of unity unable to have a function that takes two parameters (which the method does)
+    public void CreateEnemy()
+    {
+        if (PlayerOne.Setup == true)
+        {
+            mShipManager.SetupEnemy(mBoard, PlayerTwo);
+        }
+    }
 }

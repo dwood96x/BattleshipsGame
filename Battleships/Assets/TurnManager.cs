@@ -10,8 +10,11 @@ public class TurnManager : MonoBehaviour
 
     public void StartGame(GameManager manager)
     {
-        manager.PlayerOne.Setup = false;
-        PlayersTurn = 1;
+        if (manager.PlayerOne.Setup == true)
+        {
+            manager.PlayerOne.Setup = false;
+            PlayersTurn = 1;
+        }
     }
     public void EndGame(GameManager manager)
     {

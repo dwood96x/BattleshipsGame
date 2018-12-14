@@ -87,7 +87,7 @@ public class Ship : EventTrigger
     }
     public void Hit()
     {
-        mColor = Color.red;
+        GetComponent<Image>().color = Color.red;
     }
     public void Remove()
     {
@@ -145,5 +145,13 @@ public class Ship : EventTrigger
         }
 
         Move();
+    }
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        base.OnPointerClick(eventData);
+        if (this.mPlayer.PlayerNum == 2)
+        {
+            Hit();
+        }
     }
 }

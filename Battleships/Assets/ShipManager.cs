@@ -35,16 +35,15 @@ public class ShipManager : MonoBehaviour
 
         //Place ships
         PlaceShips(mPlayerOneShips, board);
-
     }
     public void SetupEnemy(GameBoard board, Player player)
     {
         //TODO : Randomsize the enemy ships locations
         //Create the player twos pieces
-        mPlayerOneShips = CreateShips(Color.blue, new Color32(0, 0, 0, 255), board, player);
+        mPlayerTwoShips = CreateShips(Color.blue, new Color32(0, 0, 0, 0), board, player);
 
         //Place ships
-        PlaceShips(mPlayerTwoShips, board);
+        PlaceShipsRandom(mPlayerTwoShips, board);
     }
     private List<Ship> CreateShips(Color color, Color32 spriteColor, GameBoard board, Player player)
     {
@@ -79,6 +78,21 @@ public class ShipManager : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             ships[i].Place(board.mPOneCoords[i,i+1]);
+        }
+    }
+    private void PlaceShipsRandom(List<Ship> ships, GameBoard board)
+    {
+        System.Random random = new System.Random();
+
+        for (int i = 0; i < 6;)
+        {
+            int randx = random.Next(1, 10);
+            int randy = random.Next(1, 10);
+            if (board.mPTwoCoords[randx, randy].mCurrentShip == null)
+            {
+                ships[i].Place(board.mPTwoCoords[randx, randy]);
+                i++;
+            }
         }
     }
 }

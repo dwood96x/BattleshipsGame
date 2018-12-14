@@ -38,17 +38,35 @@ public class Coord : EventTrigger, IPointerClickHandler, IPointerDownHandler, IP
         //Checks if the enemy board is fired on by checking position
         if (PlayerNumBoard == 2 && TurnManager.PlayersTurn == 1)
         {
-            if (mCurrentShip == null)
+            if (GetComponent<Image>().color != Color.cyan)
             {
-                Miss();
-            }
-            else
-            {
-                if (mCurrentShip.mPlayer.PlayerNum != 1 && mCurrentShip.mPlayer.MyTurn == true)
+                if (mCurrentShip == null)
                 {
-                    mCurrentShip.Hit();
+                    Miss();
+                }
+                else
+                {
+                    if (mCurrentShip.mPlayer.PlayerNum != 1 && mCurrentShip.mPlayer.MyTurn == true)
+                    {
+                        mCurrentShip.Hit();
+                    }
                 }
             }
+        }
+    }
+    public void AIFire()
+    {
+        if(GetComponent<Image>().color == Color.cyan)
+        {
+            return;
+        }
+        if(mCurrentShip == null)
+        {
+            Miss();
+        }
+        else
+        {
+            mCurrentShip.Hit();
         }
     }
     public void Miss()
